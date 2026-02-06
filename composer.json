@@ -9,7 +9,7 @@
   "license": "MIT",
   "autoload": {
     "psr-4": {
-      "Hadder\\NfseNacional\\": "src/"
+      "Lmafra\\NfseNacional\\": "src/"
     },
     "files": [
       "Helpers.php"
