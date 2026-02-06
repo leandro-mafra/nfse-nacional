@@ -1,6 +1,6 @@
 <?php
 
-namespace Hadder\NfseNacional;
+namespace lmafra\NfseNacional;
 
 /**
  * Class for RPS construction and validation of data
