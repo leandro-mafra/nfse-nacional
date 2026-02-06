@@ -1,6 +1,6 @@
 <?php
 
-namespace lmafra\NfseNacional;
+namespace Lmafra\NfseNacional;
 
 interface DpsInterface
 {
