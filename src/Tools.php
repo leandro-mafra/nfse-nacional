@@ -189,7 +189,7 @@ class Tools extends RestCurl
 
     public function cancelaNfse($std)
     {
-        $dps = new \Hadder\NfseNacional\Dps($std);
+        $dps = new \Lmafra\NfseNacional\Dps($std);
         $content = $dps->renderEvento($std);
         //$content = $this->canonize($content);
         $content = $this->sign($content, 'infPedReg', '', 'pedRegEvento');
