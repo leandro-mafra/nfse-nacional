@@ -3,7 +3,7 @@
 namespace Lmafra\NfseNacional;
 
 use Exception;
-use Hadder\NfseNacional\Common\RestBase;
+use Lmafra\NfseNacional\Common\RestBase;
 use NFePHP\Common\Certificate;
 use NFePHP\Common\Exception\SoapException;
 use NFePHP\Common\Signer;
