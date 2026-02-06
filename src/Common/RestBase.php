@@ -1,6 +1,6 @@
 <?php
 
-namespace Hadder\NfseNacional\Common;
+namespace lmafra\NfseNacional\Common;
 
 use Exception;
 use NFePHP\Common\Certificate;
