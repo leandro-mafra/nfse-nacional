@@ -1,6 +1,6 @@
 <?php
 
-namespace Hadder\NfseNacional;
+namespace lmafra\NfseNacional;
 
 use Exception;
 use Hadder\NfseNacional\Common\RestBase;
