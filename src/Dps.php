@@ -1665,7 +1665,7 @@ class Dps implements DpsInterface
                         );
                     }
                }
-
+            }
         }
 
         $dps = $this->dom->createElement('DPS');
