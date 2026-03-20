@@ -625,8 +625,121 @@ class Dps implements DpsInterface
 
         }
 
+        // tags obra
+        if(isset($this->std->infdps->serv->obra)) {
+            $obra_inner = $this->dom->createElement('obra');
+            $serv_inner->appendChild($obra_inner);
+            if(isset($this->std->infdps->serv->obra->inscimobfisc)) {
+                $this->dom->addChild(
+                    $obra_inner,
+                    'inscImobFisc',
+                    $this->std->infdps->serv->obra->inscimobfisc,
+                    true
+                );
+            }
+
+            if(isset($this->std->infdps->serv->obra->cobra)) {
+                $this->dom->addChild(
+                    $obra_inner,
+                    'cObra',
+                    $this->std->infdps->serv->obra->cobra,
+                    true
+                );
+            }
+
+            if(isset($this->std->infdps->serv->obra->ccib)) {
+                $this->dom->addChild(
+                    $obra_inner,
+                    'cCIB',
+                    $this->std->infdps->serv->obra->ccib,
+                    true
+                );
+            }
+
+            if(isset($this->std->infdps->serv->obra->end)) {
+                $end_obra_inner = $this->dom->createElement('end');
+                $obra_inner->appendChild($end_obra_inner);
+
+                if (isset($this->std->infdps->serv->obra->end->cep)) {
+                    $this->dom->addChild(
+                        $end_obra_inner,
+                        'CEP',
+                        $this->std->infdps->serv->obra->end->cep,
+                        true
+                    );
+                }
+
+                if(isset($this->std->infdps->serv->obra->end->endext)){
+                    $endext_obra_inner = $this->dom->createElement('endExt');
+                    $end_obra_inner->appendChild($endext_obra_inner);
+
+                    if(isset($this->std->infdps->serv->obra->end->endext->cendpost)){
+                        $this->dom->addChild(
+                            $endext_obra_inner,
+                            'cEndPost',
+                            $this->std->infdps->serv->obra->end->endext->cendpost,
+                            true
+                        );
+                    }
+
+                    if(isset($this->std->infdps->serv->obra->end->endext->xcidade)){
+                        $this->dom->addChild(
+                            $endext_obra_inner,
+                            'xCidade',
+                            $this->std->infdps->serv->obra->end->endext->xcidade,
+                            true
+                        );
+                    }
+
+                    if(isset($this->std->infdps->serv->obra->end->endext->xestprovreg)){
+                        $this->dom->addChild(
+                            $endext_obra_inner,
+                            'xEstProvReg',
+                            $this->std->infdps->serv->obra->end->endext->xestprovreg,
+                            true
+                        );
+                    }
+                }
+
+                if (isset($this->std->infdps->serv->obra->end->xlgr)) {
+                    $this->dom->addChild(
+                        $end_obra_inner,
+                        'xLgr',
+                        $this->std->infdps->serv->obra->end->xlgr,
+                        true
+                    );
+                }
+
+                if (isset($this->std->infdps->serv->obra->end->nro)) {
+                    $this->dom->addChild(
+                        $end_obra_inner,
+                        'nro',
+                        $this->std->infdps->serv->obra->end->nro,
+                        true
+                    );
+                }
+
+                if (isset($this->std->infdps->serv->obra->end->xcpl)) {
+                    $this->dom->addChild(
+                        $end_obra_inner,
+                        'xCpl',
+                        $this->std->infdps->serv->obra->end->xcpl,
+                        true
+                    );
+                }
+
+                if (isset($this->std->infdps->serv->obra->end->xbairro)) {
+                    $this->dom->addChild(
+                        $end_obra_inner,
+                        'xBairro',
+                        $this->std->infdps->serv->obra->end->xbairro,
+                        true
+                    );
+                }
+            }
+        }
+
         //TODO Fazer grupo lsadppu
-        //TODO Fazer grupo obra
         if (isset($this->std->infdps->serv->atvevento)) {
             $atvEvento_inner = $this->dom->createElement('atvEvento');
             $serv_inner->appendChild($atvEvento_inner);
