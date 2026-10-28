@@ -133,6 +133,14 @@ class Dps implements DpsInterface
                 $this->std->infdps->cmotivoemisti
             );
         }
+        if (isset($this->std->infdps->finnfse)) {
+            $this->dom->addChild(
+                $infdps_inner,
+                'finNFSe',
+                $this->std->infdps->finnfse,
+                true
+            );
+        }
         if (isset($this->std->infdps->chnfserej)) {
             $this->dom->addChild(
                 $infdps_inner,
@@ -532,12 +540,6 @@ class Dps implements DpsInterface
                 true
             );
         }
-        $this->dom->addChild(
-            $cserv_inner,
-            'xDescServ',
-            $this->std->infdps->serv->cserv->xdescserv,
-            true
-        );
         if (isset($this->std->infdps->serv->cserv->cnbs)) {
             $this->dom->addChild(
                 $cserv_inner,
@@ -546,6 +548,12 @@ class Dps implements DpsInterface
                 true
             );
         }
+        $this->dom->addChild(
+            $cserv_inner,
+            'xDescServ',
+            $this->std->infdps->serv->cserv->xdescserv,
+            true
+        );
         if (isset($this->std->infdps->serv->cserv->cintcontrib)) {
             $this->dom->addChild(
                 $cserv_inner,
@@ -921,6 +929,29 @@ class Dps implements DpsInterface
 			$this->dom->addChild($descontos_inner, 'vDescCond',   $vDescCond,   false);
 		}
 
+        if (isset($this->std->infdps->valores->vajustebc)) {
+            $vajustebc_inner = $this->dom->createElement('vAjusteBC');
+            $valores_inner->appendChild($vajustebc_inner);
+
+            if (isset($this->std->infdps->valores->vajustebc->pajustebcissqn)) {
+                $this->dom->addChild(
+                    $vajustebc_inner,
+                    'pAjusteBCISSQN',
+                    $this->std->infdps->valores->vajustebc->pajustebcissqn,
+                    true
+                );
+            }
+
+            if (isset($this->std->infdps->valores->vajustebc->vajustebcissqn)) {
+                $this->dom->addChild(
+                    $vajustebc_inner,
+                    'vAjusteBCISSQN',
+                    $this->std->infdps->valores->vajustebc->vajustebcissqn,
+                    true
+                );
+            }
+        }
+
 
         //TODO Fazer grupo vDedRed
 
@@ -938,8 +969,8 @@ class Dps implements DpsInterface
         );
 
         if(
-            isset($this->std->infdps->valores->trib->tribmun->cpaisresult) && 
-            isset($this->std->infdps->valores->trib->tribmun->tribissqn) && 
+            isset($this->std->infdps->valores->trib->tribmun->cpaisresult) &&
+            isset($this->std->infdps->valores->trib->tribmun->tribissqn) &&
             $this->std->infdps->valores->trib->tribmun->tribissqn == 3
         ){
             $this->dom->addChild(
@@ -1122,14 +1153,14 @@ class Dps implements DpsInterface
        if (isset($this->std->infdps->ibscbs)) {
            $ibscbs_inner = $this->dom->createElement('IBSCBS');
            $infdps_inner->appendChild($ibscbs_inner);
-            if (isset($this->std->infdps->ibscbs->finnfse)) {
-                $this->dom->addChild(
-                    $ibscbs_inner,
-                    'finNFSe',
-                    $this->std->infdps->ibscbs->finnfse,
-                    true
-                );
-            }
+            // if (isset($this->std->infdps->ibscbs->finnfse)) {
+            //     $this->dom->addChild(
+            //         $ibscbs_inner,
+            //         'finNFSe',
+            //         $this->std->infdps->ibscbs->finnfse,
+            //         true
+            //     );
+            // }
             if (isset($this->std->infdps->ibscbs->cindop)) {
                 $this->dom->addChild(
                     $ibscbs_inner,
@@ -1672,117 +1703,124 @@ class Dps implements DpsInterface
                     }
                }
 
-               $ibscbs_valores_trib_inner = $this->dom->createElement('trib');
-               $ibscbs_valores_inner->appendChild($ibscbs_valores_trib_inner);
+               if (isset($this->std->infdps->ibscbs->valores->trib)) {
 
-               $ibscbs_valores_trib_gibscbs_inner = $this->dom->createElement('gIBSCBS');
-               $ibscbs_valores_trib_inner->appendChild($ibscbs_valores_trib_gibscbs_inner);
-               if (isset($this->std->infdps->ibscbs->valores->trib->gibscbs->cst)) {
-                   $this->dom->addChild(
-                       $ibscbs_valores_trib_gibscbs_inner,
-                       'CST',
-                       $this->std->infdps->ibscbs->valores->trib->gibscbs->cst,
-                       true
-                   );
-               }
-               if (isset($this->std->infdps->ibscbs->valores->trib->gibscbs->cclasstrib)) {
-                   $this->dom->addChild(
-                       $ibscbs_valores_trib_gibscbs_inner,
-                       'cClassTrib',
-                       $this->std->infdps->ibscbs->valores->trib->gibscbs->cclasstrib,
-                       true
-                   );
-               }
-               if (isset($this->std->infdps->ibscbs->valores->trib->gibscbs->ccredpres)) {
-                   $this->dom->addChild(
-                       $ibscbs_valores_trib_gibscbs_inner,
-                       'cCredPres',
-                       $this->std->infdps->ibscbs->valores->trib->gibscbs->ccredpres
-                   );
-               }
+                   $ibscbs_valores_trib_inner = $this->dom->createElement('trib');
+                   $ibscbs_valores_inner->appendChild($ibscbs_valores_trib_inner);
 
-               if (isset($this->std->infdps->ibscbs->valores->trib->gibscbs->gtribregular)) { // Grupo de informações da Tributação Regular
-                   $ibscbs_valores_trib_gtribregular_inner = $this->dom->createElement('gTribRegular');
-                   $ibscbs_valores_trib_gibscbs_inner->appendChild($ibscbs_valores_trib_gtribregular_inner);
-                   if (isset($this->std->infdps->ibscbs->valores->trib->gibscbs->gtribregular->cstreg)) {
+                   if (isset($this->std->infdps->ibscbs->valores->trib->cst)) {
                        $this->dom->addChild(
-                           $ibscbs_valores_trib_gtribregular_inner,
-                           'CSTReg',
-                           $this->std->infdps->ibscbs->valores->trib->gibscbs->gtribregular->cstreg,
+                           $ibscbs_valores_trib_inner,
+                           'CST',
+                           $this->std->infdps->ibscbs->valores->trib->cst,
                            true
                        );
                    }
-                   if (isset($this->std->infdps->ibscbs->valores->trib->gibscbs->gtribregular->cclasstribreg)) {
+                   if (isset($this->std->infdps->ibscbs->valores->trib->cclasstrib)) {
                        $this->dom->addChild(
-                           $ibscbs_valores_trib_gtribregular_inner,
-                           'cClassTribReg',
-                           $this->std->infdps->ibscbs->valores->trib->gibscbs->gtribregular->cclasstribreg,
+                           $ibscbs_valores_trib_inner,
+                           'cClassTrib',
+                           $this->std->infdps->ibscbs->valores->trib->cclasstrib,
                            true
                        );
                    }
-               }
 
-               if (isset($this->std->infdps->ibscbs->valores->trib->gibscbs->gdif)) { // Grupo de informações relacionadas ao diferimento para IBS e CBS
-                    $ibscbs_valores_trib_gdif_inner = $this->dom->createElement('gDif');
-                    $ibscbs_valores_trib_gibscbs_inner->appendChild($ibscbs_valores_trib_gdif_inner);
-                    if (isset($this->std->infdps->ibscbs->valores->trib->gibscbs->gdif->pdifuf)) {
-                        $this->dom->addChild(
-                            $ibscbs_valores_trib_gdif_inner,
-                            'pDifUF',
-                            $this->std->infdps->ibscbs->valores->trib->gibscbs->gdif->pdifuf,
-                            true
-                        );
-                    }
-                    if (isset($this->std->infdps->ibscbs->valores->trib->gibscbs->gdif->pdifmun)) {
-                        $this->dom->addChild(
-                            $ibscbs_valores_trib_gdif_inner,
-                            'pDifMun',
-                            $this->std->infdps->ibscbs->valores->trib->gibscbs->gdif->pdifmun,
-                            true
-                        );
-                    }
-                    if (isset($this->std->infdps->ibscbs->valores->trib->gibscbs->gdif->pdifcbs)) {
-                        $this->dom->addChild(
-                            $ibscbs_valores_trib_gdif_inner,
-                            'pDifCBS',
-                            $this->std->infdps->ibscbs->valores->trib->gibscbs->gdif->pdifcbs,
-                            true
-                        );
-                    }
-               }
+                   if (isset($this->std->infdps->ibscbs->valores->trib->gibscbs)) {
+                       $ibscbs_valores_trib_gibscbs_inner = $this->dom->createElement('gIBSCBS');
+                       $ibscbs_valores_trib_inner->appendChild($ibscbs_valores_trib_gibscbs_inner);
 
-                if (isset($this->std->infdps->ibscbs->valores->trib->gibscbs->gestornocred)) { // Grupo de informações relacionadas aos estornos de créditos do IBS e da CBS.
-                    $ibscbs_valores_trib_gestornocred_inner = $this->dom->createElement('gEstornoCred');
-                    $ibscbs_valores_trib_gibscbs_inner->appendChild($ibscbs_valores_trib_gestornocred_inner);
-                    if (isset($this->std->infdps->ibscbs->valores->trib->gibscbs->gestornocred->vibsEstCred)) {
-                        $this->dom->addChild(
-                            $ibscbs_valores_trib_gestornocred_inner,
-                            'vIBSEstCred',
-                            $this->std->infdps->ibscbs->valores->trib->gibscbs->gestornocred->vibsEstCred,
-                            true
-                        );
-                    }
-                    if (isset($this->std->infdps->ibscbs->valores->trib->gibscbs->gestornocred->vcbsestcred)) {
-                        $this->dom->addChild(
-                            $ibscbs_valores_trib_gestornocred_inner,
-                            'vCBSEstCred',
-                            $this->std->infdps->ibscbs->valores->trib->gibscbs->gestornocred->vcbsestcred,
-                            true
-                        );
-                    }
-               }
+                       if (isset($this->std->infdps->ibscbs->valores->trib->gibscbs->ccredpres)) {
+                           $this->dom->addChild(
+                               $ibscbs_valores_trib_gibscbs_inner,
+                               'cCredPres',
+                               $this->std->infdps->ibscbs->valores->trib->gibscbs->ccredpres
+                           );
+                       }
 
-                if (isset($this->std->infdps->ibscbs->valores->trib->gibscbs->gpagantecipado)) { // Grupo de referenciamento das NFS-e de pagamento antecipado para abatimento.
-                    $ibscbs_valores_trib_gpagantecipado_inner = $this->dom->createElement('gPagAntecipado');
-                    $ibscbs_valores_trib_gibscbs_inner->appendChild($ibscbs_valores_trib_gpagantecipado_inner);
-                    if (isset($this->std->infdps->ibscbs->valores->trib->gibscbs->gpagantecipado->refnfse)) {
-                        $this->dom->addChild(
-                            $ibscbs_valores_trib_gpagantecipado_inner,
-                            'refNFSe',
-                            $this->std->infdps->ibscbs->valores->trib->gibscbs->gpagantecipado->refnfse,
-                            true
-                        );
-                    }
+                       if (isset($this->std->infdps->ibscbs->valores->trib->gibscbs->gtribregular)) { // Grupo de informações da Tributação Regular
+                           $ibscbs_valores_trib_gtribregular_inner = $this->dom->createElement('gTribRegular');
+                           $ibscbs_valores_trib_gibscbs_inner->appendChild($ibscbs_valores_trib_gtribregular_inner);
+                           if (isset($this->std->infdps->ibscbs->valores->trib->gibscbs->gtribregular->cstreg)) {
+                               $this->dom->addChild(
+                                   $ibscbs_valores_trib_gtribregular_inner,
+                                   'CSTReg',
+                                   $this->std->infdps->ibscbs->valores->trib->gibscbs->gtribregular->cstreg,
+                                   true
+                               );
+                           }
+                           if (isset($this->std->infdps->ibscbs->valores->trib->gibscbs->gtribregular->cclasstribreg)) {
+                               $this->dom->addChild(
+                                   $ibscbs_valores_trib_gtribregular_inner,
+                                   'cClassTribReg',
+                                   $this->std->infdps->ibscbs->valores->trib->gibscbs->gtribregular->cclasstribreg,
+                                   true
+                               );
+                           }
+                       }
+
+                       if (isset($this->std->infdps->ibscbs->valores->trib->gibscbs->gdif)) { // Grupo de informações relacionadas ao diferimento para IBS e CBS
+                            $ibscbs_valores_trib_gdif_inner = $this->dom->createElement('gDif');
+                            $ibscbs_valores_trib_gibscbs_inner->appendChild($ibscbs_valores_trib_gdif_inner);
+                            if (isset($this->std->infdps->ibscbs->valores->trib->gibscbs->gdif->pdifuf)) {
+                                $this->dom->addChild(
+                                    $ibscbs_valores_trib_gdif_inner,
+                                    'pDifUF',
+                                    $this->std->infdps->ibscbs->valores->trib->gibscbs->gdif->pdifuf,
+                                    true
+                                );
+                            }
+                            if (isset($this->std->infdps->ibscbs->valores->trib->gibscbs->gdif->pdifmun)) {
+                                $this->dom->addChild(
+                                    $ibscbs_valores_trib_gdif_inner,
+                                    'pDifMun',
+                                    $this->std->infdps->ibscbs->valores->trib->gibscbs->gdif->pdifmun,
+                                    true
+                                );
+                            }
+                            if (isset($this->std->infdps->ibscbs->valores->trib->gibscbs->gdif->pdifcbs)) {
+                                $this->dom->addChild(
+                                    $ibscbs_valores_trib_gdif_inner,
+                                    'pDifCBS',
+                                    $this->std->infdps->ibscbs->valores->trib->gibscbs->gdif->pdifcbs,
+                                    true
+                                );
+                            }
+                       }
+
+                        if (isset($this->std->infdps->ibscbs->valores->trib->gibscbs->gestornocred)) { // Grupo de informações relacionadas aos estornos de créditos do IBS e da CBS.
+                            $ibscbs_valores_trib_gestornocred_inner = $this->dom->createElement('gEstornoCred');
+                            $ibscbs_valores_trib_gibscbs_inner->appendChild($ibscbs_valores_trib_gestornocred_inner);
+                            if (isset($this->std->infdps->ibscbs->valores->trib->gibscbs->gestornocred->vibsEstCred)) {
+                                $this->dom->addChild(
+                                    $ibscbs_valores_trib_gestornocred_inner,
+                                    'vIBSEstCred',
+                                    $this->std->infdps->ibscbs->valores->trib->gibscbs->gestornocred->vibsEstCred,
+                                    true
+                                );
+                            }
+                            if (isset($this->std->infdps->ibscbs->valores->trib->gibscbs->gestornocred->vcbsestcred)) {
+                                $this->dom->addChild(
+                                    $ibscbs_valores_trib_gestornocred_inner,
+                                    'vCBSEstCred',
+                                    $this->std->infdps->ibscbs->valores->trib->gibscbs->gestornocred->vcbsestcred,
+                                    true
+                                );
+                            }
+                       }
+
+                        if (isset($this->std->infdps->ibscbs->valores->trib->gibscbs->gpagantecipado)) { // Grupo de referenciamento das NFS-e de pagamento antecipado para abatimento.
+                            $ibscbs_valores_trib_gpagantecipado_inner = $this->dom->createElement('gPagAntecipado');
+                            $ibscbs_valores_trib_gibscbs_inner->appendChild($ibscbs_valores_trib_gpagantecipado_inner);
+                            if (isset($this->std->infdps->ibscbs->valores->trib->gibscbs->gpagantecipado->refnfse)) {
+                                $this->dom->addChild(
+                                    $ibscbs_valores_trib_gpagantecipado_inner,
+                                    'refNFSe',
+                                    $this->std->infdps->ibscbs->valores->trib->gibscbs->gpagantecipado->refnfse,
+                                    true
+                                );
+                            }
+                       }
+                   }
                }
             }
         }
