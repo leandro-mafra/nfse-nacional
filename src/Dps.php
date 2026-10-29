@@ -1463,32 +1463,32 @@ class Dps implements DpsInterface
            }
 
            // Grupo de informações relativas aos bens móveis objetos de locação
-           if (isset($this->std->infdps->ibscbs->glocbensmoveis)) {
-                foreach ($this->std->infdps->ibscbs->glocbensmoveis as $gLocBensMoveis) {
-                    $gLocBensMoveis = $this->propertiesToLower($gLocBensMoveis);
-                    $ibscbs_gLocBensMoveis_inner = $this->dom->createElement('gLocBensMoveis');
-                    $ibscbs_inner->appendChild($ibscbs_gLocBensMoveis_inner);
-                    if (isset($gLocBensMoveis->cncmbemmovel)) {
+           if (isset($this->std->infdps->ibscbs->bensmoveis)) {
+                foreach ($this->std->infdps->ibscbs->bensmoveis as $bensmoveis) {
+                    $bensmoveis = $this->propertiesToLower($bensmoveis);
+                    $ibscbs_bensMoveis_inner = $this->dom->createElement('bensMoveis');
+                    $ibscbs_inner->appendChild($ibscbs_bensMoveis_inner);
+                    if (isset($bensmoveis->cncmbemmovel)) {
                         $this->dom->addChild(
-                             $ibscbs_gLocBensMoveis_inner,
+                             $ibscbs_bensMoveis_inner,
                              'cNCMBemMovel',
-                             $gLocBensMoveis->cncmbemmovel,
+                             $bensmoveis->cncmbemmovel,
                              true
                         );
                     }
-                    if (isset($gLocBensMoveis->xncmbemmovel)) {
+                    if (isset($bensmoveis->xncmbemmovel)) {
                         $this->dom->addChild(
-                             $ibscbs_gLocBensMoveis_inner,
+                             $ibscbs_bensMoveis_inner,
                              'xNCMBemMovel',
-                             $gLocBensMoveis->xncmbemmovel,
+                             $bensmoveis->xncmbemmovel,
                              true
                         );
                     }
-                    if (isset($gLocBensMoveis->qtdncmbemmovel)) {
+                    if (isset($bensmoveis->qtdncmbemmovel)) {
                         $this->dom->addChild(
-                             $ibscbs_gLocBensMoveis_inner,
+                             $ibscbs_bensMoveis_inner,
                              'qtdNCMBemMovel',
-                             $gLocBensMoveis->qtdncmbemmovel,
+                             $bensmoveis->qtdncmbemmovel,
                              true
                         );
                     }
